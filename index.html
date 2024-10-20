@@ -1,214 +1,209 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel="icon" type="image/png" href="image/favicon.ico">
-		<title>20 tháng 10 </title>    
-        <link type="text/css" rel="stylesheet" href="./renxi/default.css">
-		<script type="text/javascript" src="./renxi/jquery.min.js"></script>
-		<script type="text/javascript" src="./renxi/jscex.min.js"></script>
-		<script type="text/javascript" src="./renxi/jscex-parser.js"></script>
-		<script type="text/javascript" src="./renxi/jscex-jit.js"></script>
-		<script type="text/javascript" src="./renxi/jscex-builderbase.min.js"></script>
-		<script type="text/javascript" src="./renxi/jscex-async.min.js"></script>
-		<script type="text/javascript" src="./renxi/jscex-async-powerpack.min.js"></script>
-		<script type="text/javascript" src="./renxi/functions.js" charset="utf-8"></script>
-        <script type="text/javascript" src="./renxi/love.js" charset="utf-8"></script>
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Falling Hearts</title>
+		<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+		<style>
+			body {
+				margin: 0;
+				overflow: hidden;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				background: url("/image/love.jpg");
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: cover;
+			}
 
-</head>
-    <body>
- 
-			<audio autoplay="autoplay" >
-					<source src="music/I-Do-911.mp3" type="audio/mp3" />
-            </audio> 
+			#main {
+				position: relative;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(255, 255, 255, 0.5);
+			}
 
-          
+			#wrap {
+				position: relative;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+			}
 
-        <div id="main">
-            <div id="error">Trình duyệt của bạn không được hỗ trợ. Để được hỗ trợ liên hệ genzhoccode@gmail.com. Hoặc sử dụng (<a href="http://www.google.cn/chrome">Chrome</a>) và (<a href="http://firefox.com/download/">Firefox</a>)</div>
-             <div id="wrap">
-                <div id="text" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;">
-			        <div id="code">
-			      <font color="#000" ><span class="say">Xin chào Vy nhó!</span><br>
-						<span class="say"> </span><br>
-						<span class="say">Anh thật sự không có quá nhiều lời hoa mỹ để dành tặng cho em trong ngày 20/10</span><br>
-						<span class="say">Chỉ mong rằng em luôn bình an, luôn yên vui và luôn hạnh phúc bên cạnh anh.</span><br>
-						<span class="say">Cảm ơn em và chúc em có 20/10 vui vẻ nhó!!! </span><br>
-                        <span class="say"><span class="space"></span> --Po Thúi--</span><br><br>
-                        <span class="say"><img width="100px" height="100px" src="image/tym.png" alt="">
-			  </font>
-      </div>
-                </div>
-                <div id="clock-box">
-                    <!-- <span class="STYLE1"></span><font color="#FF0000">Ngày 8/3 cuối cùng ta ngồi với nhau đến nay đã....</font> -->
-<!-- <span class="STYLE1"> Time of love...</span> -->
-                  <div id="clock"></div>
-              </div>
-                <canvas id="canvas" width="1100" height="680"></canvas>
-            </div>
-            
-        </div>
-    
-    <script>
-    </script>
+			#text {
+				position: absolute;
+				z-index: 10; /* Ensure text is above the canvas */
+				text-align: justify;
+				width: 400px;
+				font-size: 20px;
+			}
 
-    <script>
-    (function(){
-        var canvas = $('#canvas');
-		
-        if (!canvas[0].getContext) {
-            $("#error").show();
-            return false;        }
+			#canvas {
+				position: absolute;
+				z-index: 1; /* Ensure canvas is below the text */
+			}
 
-        var width = canvas.width();
-        var height = canvas.height();        
-        canvas.attr("width", width);
-        canvas.attr("height", height);
-        var opts = {
-            seed: {
-                x: width / 2 - 20,
-                color: "rgb(190, 26, 37)",
-                scale: 2
-            },
-            branch: [
-                [535, 680, 570, 250, 500, 200, 30, 100, [
-                    [540, 500, 455, 417, 340, 400, 13, 100, [
-                        [450, 435, 434, 430, 394, 395, 2, 40]
-                    ]],
-                    [550, 445, 600, 356, 680, 345, 12, 100, [
-                        [578, 400, 648, 409, 661, 426, 3, 80]
-                    ]],
-                    [539, 281, 537, 248, 534, 217, 3, 40],
-                    [546, 397, 413, 247, 328, 244, 9, 80, [
-                        [427, 286, 383, 253, 371, 205, 2, 40],
-                        [498, 345, 435, 315, 395, 330, 4, 60]
-                    ]],
-                    [546, 357, 608, 252, 678, 221, 6, 100, [
-                        [590, 293, 646, 277, 648, 271, 2, 80]
-                    ]]
-                ]] 
-            ],
-            bloom: {
-                num: 700,
-                width: 1080,
-                height: 650,
-            },
-            footer: {
-                width: 1200,
-                height: 5,
-                speed: 10,
-            }
-        }
+			.heart {
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				background-color: red;
+				clip-path: polygon(50% 0%, 100% 35%, 82% 100%, 50% 75%, 18% 100%, 0% 35%);
+				animation: fall 5s linear infinite;
+			}
 
-        var tree = new Tree(canvas[0], width, height, opts);
-        var seed = tree.seed;
-        var foot = tree.footer;
-        var hold = 1;
+			@keyframes fall {
+				0% {
+					top: -50px;
+				}
+				100% {
+					top: 100vh;
+				}
+			}
 
-        canvas.click(function(e) {
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            if (seed.hover(x, y)) {
-                hold = 0; 
-                canvas.unbind("click");
-                canvas.unbind("mousemove");
-                canvas.removeClass('hand');
-            }
-        }).mousemove(function(e){
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            canvas.toggleClass('hand', seed.hover(x, y));
-        });
+			.say {
+				display: none; /* Initially hide the text */
+				opacity: 0; /* Start with invisible text */
+				animation: fadeIn 1s forwards; /* Fade-in animation */
+			}
 
-        var seedAnimate = eval(Jscex.compile("async", function () {
-            seed.draw();
-            while (hold) {
-                $await(Jscex.Async.sleep(10));
-            }
-            while (seed.canScale()) {
-                seed.scale(0.95);
-                $await(Jscex.Async.sleep(10));
-            }
-            while (seed.canMove()) {
-                seed.move(0, 2);
-                foot.draw();
-                $await(Jscex.Async.sleep(10));
-            }
-        }));
+			@keyframes fadeIn {
+				to {
+					opacity: 1; /* End with fully visible text */
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<audio autoplay="autoplay">
+			<source src="music/I-Do-911.mp3" type="audio/mp3" />
+		</audio>
 
-        var growAnimate = eval(Jscex.compile("async", function () {
-            do {
-    	        tree.grow();
-                $await(Jscex.Async.sleep(10));
-            } while (tree.canGrow());
-        }));
+		<div id="main">
+			<div id="wrap">
+				<div id="text" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+					<div id="code">
+						<span class="say">Xin chào Vy nhó!</span><br />
+						<span class="say"> </span><br />
+						<span class="say">Anh thật sự không có quá nhiều lời hoa mỹ để dành tặng cho em trong ngày 20/10</span><br />
+						<span class="say">Chỉ mong rằng em luôn bình an, luôn yên vui và luôn hạnh phúc bên cạnh anh.</span><br />
+						<span class="say">Cảm ơn em và chúc em có 20/10 vui vẻ nhó!!! </span><br />
+						<span class="say"><span class="space"></span> --Po Thúi--</span><br /><br />
+						<span class="say"><img width="100px" height="100px" src="image/tym.png" alt="" /> </span>
+					</div>
+				</div>
+				<canvas id="canvas" width="1100" height="680"></canvas>
+			</div>
+		</div>
 
-        var flowAnimate = eval(Jscex.compile("async", function () {
-            do {
-    	        tree.flower(2);
-                $await(Jscex.Async.sleep(10));
-            } while (tree.canFlower());
-        }));
+		<script>
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
 
-        var moveAnimate = eval(Jscex.compile("async", function () {
-            tree.snapshot("p1", 240, 0, 610, 680);
-            while (tree.move("p1", 500, 0)) {
-                foot.draw();
-                $await(Jscex.Async.sleep(10));
-            }
-            foot.draw();
-            tree.snapshot("p2", 500, 0, 610, 680);
+			function getRandomBeautifulColor() {
+				const colors = [
+					"rgb(255, 105, 180)", // Hot Pink
+					"rgb(255, 20, 147)", // Deep Pink
+					"rgb(255, 0, 0)", // Red
+					"rgb(255, 69, 0)", // Orange Red
+					"rgb(255, 140, 0)", // Dark Orange
+					"rgb(255, 165, 0)", // Orange
+					"rgb(255, 215, 0)", // Gold
+					"rgb(255, 255, 0)", // Yellow
+					"rgb(255, 182, 193)", // Light Pink
+					"rgb(255, 192, 203)", // Pink
+				];
+				return colors[Math.floor(Math.random() * colors.length)];
+			}
 
-            canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
-            canvas.css("background", "#ffe");
-            $await(Jscex.Async.sleep(300));
-            canvas.css("background", "none");
-        }));
+			function createHeart(x, y, scale, text) {
+				return {
+					point: { x: x, y: y },
+					color: getRandomBeautifulColor(),
+					scale: scale,
+					text: text,
+					direction: Math.random() * 2 - 1, // Random horizontal direction
+					rotation: Math.random() * 360, // Initial rotation angle
+					rotationSpeed: Math.random() * 2 - 1, // Random rotation speed
+					figure: {
+						length: 100,
+						get: function (i, scale) {
+							var angle = (i / this.length) * 2 * Math.PI;
+							var x = 16 * Math.pow(Math.sin(angle), 3);
+							var y = 13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle);
+							return { x: x * scale, y: y * scale };
+						},
+					},
+				};
+			}
 
-        var jumpAnimate = eval(Jscex.compile("async", function () {
-            var ctx = tree.ctx;
-            while (true) {
-                tree.ctx.clearRect(0, 0, width, height);
-                tree.jump();
-                foot.draw();
-                $await(Jscex.Async.sleep(25));
-            }
-        }));
+			var hearts = [];
+			for (var i = 0; i < 50; i++) {
+				hearts.push(createHeart(Math.random() * canvas.width, Math.random() * -canvas.height, 1, "Love"));
+			}
 
-        var textAnimate = eval(Jscex.compile("async", function () {
-		    // var together = new Date();
-		    // together.setFullYear(2024,10 , 18); 			
-		    // together.setHours(0);							
-		    // together.setMinutes(0);				
-		    // together.setSeconds(0);					
-            // together.setMilliseconds(0);
-            
-           
+			function drawHeart(ctx, heart) {
+				var point = heart.point,
+					color = heart.color,
+					scale = heart.scale,
+					text = heart.text,
+					rotation = heart.rotation;
+				ctx.save();
+				ctx.fillStyle = color;
+				ctx.translate(point.x, point.y);
+				ctx.rotate((rotation * Math.PI) / 180); // Apply rotation
+				ctx.beginPath();
+				ctx.moveTo(0, 0);
+				for (var i = 0; i < heart.figure.length; i++) {
+					var p = heart.figure.get(i, scale);
+					ctx.lineTo(p.x, -p.y);
+				}
+				ctx.closePath();
+				ctx.fill();
+				ctx.fillStyle = "transparent";
+				ctx.font = "20px Arial";
+				ctx.textAlign = "center";
+				ctx.textBaseline = "middle";
+				ctx.fillText(text, 0, -10); // Adjust the position of the text inside the heart
+				ctx.restore();
+			}
 
-		    $("#code").show().typewriter();
-            $("#clock-box").fadeIn(500);
-            while (true) {
-                timeElapse(together);
-                $await(Jscex.Async.sleep(1000));
-            }
-        }));
+			function animateHearts() {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				hearts.forEach((heart) => {
+					drawHeart(ctx, heart);
+					heart.point.y += 2; // Adjust the speed of falling here
+					heart.point.x += heart.direction; // Move horizontally
+					heart.rotation += heart.rotationSpeed; // Apply rotation speed
+					if (heart.point.y > canvas.height) {
+						heart.point.y = Math.random() * -canvas.height; // Reset to a random position above the canvas
+						heart.point.x = Math.random() * canvas.width; // Reset to a random horizontal position
+						heart.rotation = Math.random() * 360; // Reset rotation
+					}
+				});
+				requestAnimationFrame(animateHearts);
+			}
 
-        var runAsync = eval(Jscex.compile("async", function () {
-            $await(seedAnimate());
-            $await(growAnimate());
-            $await(flowAnimate());
-            $await(moveAnimate());
-
-            textAnimate().start();
-
-            $await(jumpAnimate());
-        }));
-
-        runAsync().start();
-    })();
-    </script>
-<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
-<!-- <p>Contact: <a href="https://www.facebook.com/dai.vudangdai" target="_blank">dangdaiptit</a></p> -->
-</div>
-</body>
+			animateHearts();
+			// Show text one by one every 0.5 seconds
+			const textElements = document.querySelectorAll(".say");
+			let index = 0;
+			setInterval(() => {
+				if (index < textElements.length) {
+					textElements[index].style.display = "inline";
+					textElements[index].style.animation = "fadeIn 1s forwards"; // Apply the fade-in animation
+					index++;
+				}
+			}, 2000);
+		</script>
+	</body>
 </html>
